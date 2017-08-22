@@ -3,7 +3,7 @@
 <body>
 
 <script>
-var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var iOS = /Mobile|Android|iPhone/.test(navigator.userAgent) && !window.MSStream;
 
 if (!iOS) {
 	document.write('<center>');
