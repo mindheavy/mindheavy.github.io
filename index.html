@@ -1,21 +1,142 @@
 <!DOCTYPE html>
 <html>
 <body>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 95%;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.3s;
+    animation-name: zoom;
+    animation-duration: 0.3s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 1400px){
+    .modal-content {
+        width: 100%;
+    }
+}
+</style>
+	
+	
+</head>
+	
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<center>
+<img src="https://www.mesonet.org/data/nids/maps/realtime/CONUS.MosaicBREF.png" class="myImg" style="width:100%;max-width:500px">
+<img src="http://www.ssec.wisc.edu/data/geo/images/goes16/latest_goes-16_13_conus.gif" class="myImg" style="width:100%;max-width:500px">
+<img src="http://www.mesonet.org/data/public/noaa/metar/maps/realtime/latest.tair.png" class="myImg" style="width:100%;max-width:500px">
+<br>
+<img src="http://www.mesonet.org/data/nids/maps/realtime/Oklahoma.MosaicBREF.png" class="myImg" style="width:100%;max-width:500px">
+<img src="http://weather.cod.edu/data/satellite/subregional/S_Plains/current/S_Plains.14.jpg" class="myImg" style="width:100%;max-width:500px">
+<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png" class="myImg" style="width:100%;max-width:500px">
+<br>
+<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WS2M.grad.png" class="myImg" style="width:100%;max-width:500px">
+<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/today.rainrfc.png" class="myImg" style="width:100%;max-width:500px">
+<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.PALT.grad.png" class="myImg" style="width:100%;max-width:500px">
+</center>
 
 <script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementsByClassName('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+
+// show modal function
+var showModal = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// bind click event to each img
+for (var i = 0; i < img.length; i++) {
+    img[i].addEventListener('click', showModal);
+}
+
+
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("modal")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+}
+
 var iOS = /Mobile|Android|iPhone/.test(navigator.userAgent) && !window.MSStream;
 
 if (!iOS) {
 	document.write('<center>');
 		//document.write('<img src="http://www.ssec.wisc.edu/data/geo/images/goes-east/latest_goes-east_01_conus.jpg" width="55%"><br>');
 		//document.write('<img src="http://www.ssec.wisc.edu/data/geo/images/goes16/latest_goes-16_01_conus.gif" width="100%"><br>');
-		document.write('<img src="http://www.ssec.wisc.edu/data/geo/images/goes16/latest_goes-16_13_conus.gif" width="100%"><br>');
-		document.write('<img src="http://www.mesonet.org/data/public/noaa/metar/maps/realtime/latest.tair.png" width ="55%"><br>');
-		document.write('<img src="https://www.mesonet.org/data/nids/maps/realtime/CONUS.MosaicBREF.png" width ="55%"><br>');
-		document.write('<img src="http://www.mesonet.org/data/nids/maps/realtime/Oklahoma.MosaicBREF.png" width="55%"><br>');
+		//document.write('<img src="http://www.ssec.wisc.edu/data/geo/images/goes16/latest_goes-16_13_conus.gif" width="100%"><br>');
+		//document.write('<img src="http://www.mesonet.org/data/public/noaa/metar/maps/realtime/latest.tair.png" width ="55%"><br>');
+		//document.write('<img src="https://www.mesonet.org/data/nids/maps/realtime/CONUS.MosaicBREF.png" width ="55%"><br>');
+		//document.write('<img src="http://www.mesonet.org/data/nids/maps/realtime/Oklahoma.MosaicBREF.png" width="55%"><br>');
 		document.write('<a href="http://forecast.weather.gov/showsigwx.php?warnzone=OKZ060&warncounty=OKC143&firewxzone=OKZ060&local_place1=&product1=Hazardous+Weather+Outlook#.VWchxmC3Rso">Hazardous Weather Outlook</a> &nbsp; &nbsp; &nbsp; <a href="https://radar.weather.gov/Conus/full_loop.php">Hi Res US Radar Loop</a><br>');
-		document.write('<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png" width="33%"><img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WS2M.grad.png" width="33%"><br>');
-		document.write('<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/today.rainrfc.png" width="33%"><img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.PALT.grad.png" width="33%"><br>');
+		//document.write('<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png" width="33%"><img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WS2M.grad.png" width="33%"><br>');
+		//document.write('<img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/today.rainrfc.png" width="33%"><img src="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.PALT.grad.png" width="33%"><br>');
 		document.write('<img src="http://forecast.weather.gov/meteograms/Plotter.php?lat=36.1277&lon=-95.9164&wfo=TSA&zcode=OKZ060&gset=18&gdiff=3&unit=0&tinfo=CY6&ahour=0&pcmd=10011111000000000000000000000000000000000000000000000000000&lg=en&indu=1!1!1!&dd=&bw=&hrspan=48&pqpfhr=6&psnwhr=6" width="85%"><br>');
 	document.write('</center>');
 } else {
